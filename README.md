@@ -88,6 +88,23 @@ Learn more about [agents](https://opencode.ai/docs/agents).
 
 For more info on how to configure OpenCode [**head over to our docs**](https://opencode.ai/docs).
 
+### Development Setup
+
+This repository uses Git submodules. When cloning for development, use:
+
+```bash
+git clone --recursive https://github.com/SL-IT-AMAZING/easy-banana.git
+```
+
+If you've already cloned the repository:
+
+```bash
+git submodule update --init --recursive
+bun install
+```
+
+For more details on working with submodules, see our [contributing docs](./CONTRIBUTING.md).
+
 ### Contributing
 
 If you're interested in contributing to OpenCode, please read our [contributing docs](./CONTRIBUTING.md) before submitting a pull request.
