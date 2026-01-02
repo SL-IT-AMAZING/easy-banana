@@ -7,23 +7,25 @@ import { fileURLToPath } from "url"
 const dir = fileURLToPath(new URL("..", import.meta.url))
 process.chdir(dir)
 
+const BINARY_NAME = "easybanana"
+
 const { binaries } = await import("./build.ts")
 {
-  const name = `${pkg.name}-${process.platform}-${process.arch}`
-  console.log(`smoke test: running dist/${name}/bin/opencode --version`)
-  await $`./dist/${name}/bin/opencode --version`
+  const name = `${BINARY_NAME}-${process.platform}-${process.arch}`
+  console.log(`smoke test: running dist/${name}/bin/${BINARY_NAME} --version`)
+  await $`./dist/${name}/bin/${BINARY_NAME} --version`
 }
 
-await $`mkdir -p ./dist/${pkg.name}`
-await $`cp -r ./bin ./dist/${pkg.name}/bin`
-await $`cp ./script/postinstall.mjs ./dist/${pkg.name}/postinstall.mjs`
+await $`mkdir -p ./dist/${BINARY_NAME}`
+await $`cp -r ./bin ./dist/${BINARY_NAME}/bin`
+await $`cp ./script/postinstall.mjs ./dist/${BINARY_NAME}/postinstall.mjs`
 
-await Bun.file(`./dist/${pkg.name}/package.json`).write(
+await Bun.file(`./dist/${BINARY_NAME}/package.json`).write(
   JSON.stringify(
     {
-      name: pkg.name + "-ai",
+      name: BINARY_NAME + "-ai",
       bin: {
-        [pkg.name]: `./bin/${pkg.name}`,
+        [BINARY_NAME]: `./bin/${BINARY_NAME}`,
       },
       scripts: {
         postinstall: "bun ./postinstall.mjs || node ./postinstall.mjs",
@@ -49,7 +51,7 @@ const tasks = Object.entries(binaries).map(async ([name]) => {
 })
 await Promise.all(tasks)
 for (const tag of tags) {
-  await $`cd ./dist/${pkg.name} && bun pm pack && npm publish *.tgz --access public --tag ${tag}`
+  await $`cd ./dist/${BINARY_NAME} && bun pm pack && npm publish *.tgz --access public --tag ${tag}`
 }
 
 if (!Script.preview) {
@@ -62,7 +64,7 @@ if (!Script.preview) {
     }
   }
 
-  const image = "ghcr.io/sst/opencode"
+  const image = "ghcr.io/sl-it-amazing/easybanana"
   const platforms = "linux/amd64,linux/arm64"
   const tags = [`${image}:${Script.version}`, `${image}:latest`]
   const tagFlags = tags.flatMap((t) => ["-t", t])

@@ -27,7 +27,7 @@
     ],
     "active": true,
     "targets": ["deb", "rpm", "dmg", "nsis", "app", "appimage"],
-    "externalBin": ["sidecars/opencode-cli"],
+    "externalBin": ["sidecars/easybanana-cli"],
     "macOS": {
       "entitlements": "./entitlements.plist"
     },

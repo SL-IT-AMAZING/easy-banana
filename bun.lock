@@ -246,7 +246,7 @@
     },
     "packages/oh-my-opencode": {
       "name": "oh-my-opencode",
-      "version": "2.10.0",
+      "version": "2.11.0",
       "bin": {
         "oh-my-opencode": "./dist/cli/index.js",
       },
@@ -257,8 +257,8 @@
         "@code-yeongyu/comment-checker": "^0.6.1",
         "@modelcontextprotocol/sdk": "^1.25.1",
         "@openauthjs/openauth": "^0.4.3",
-        "@opencode-ai/plugin": "workspace:*",
-        "@opencode-ai/sdk": "workspace:*",
+        "@opencode-ai/plugin": "^1.0.162",
+        "@opencode-ai/sdk": "^1.0.162",
         "commander": "^14.0.2",
         "hono": "^4.10.4",
         "js-yaml": "^4.1.1",
@@ -279,7 +279,7 @@
       "name": "opencode",
       "version": "1.0.223",
       "bin": {
-        "opencode": "./bin/opencode",
+        "easybanana": "./bin/easybanana",
       },
       "dependencies": {
         "@actions/core": "1.11.1",
