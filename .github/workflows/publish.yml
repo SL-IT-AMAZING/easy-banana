@@ -44,8 +44,8 @@ jobs:
 
       - name: Build oh-my-opencode submodule
         run: |
-          cd packages/oh-my-opencode
           bun install
+          cd packages/oh-my-opencode
           bun run build
 
       - name: Install OpenCode
