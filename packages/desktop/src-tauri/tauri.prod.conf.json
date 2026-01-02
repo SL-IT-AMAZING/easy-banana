@@ -19,7 +19,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEYwMDM5Nzg5OUMzOUExMDQKUldRRW9UbWNpWmNEOENYT01CV0lhOXR1UFhpaXJsK1Z3aU9lZnNtNzE0TDROWVMwVW9XQnFOelkK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDE2QUM3QjFEOEFFRkZGOTkKUldTWi8rK0tIWHVzRmlwdkt3MG4rWUliOG0rUGhzVFhaNEtGcjBrMDRQL1JLdFh3aTg2WExXNlAK",
       "endpoints": ["https://github.com/SL-IT-AMAZING/easy-banana/releases/latest/download/latest.json"]
     }
   }

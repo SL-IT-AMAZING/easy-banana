@@ -31,11 +31,12 @@ permissions:
 jobs:
   publish:
     runs-on: blacksmith-4vcpu-ubuntu-2404
-    if: github.repository == 'sst/opencode'
+    if: github.repository == 'SL-IT-AMAZING/easy-banana'
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          submodules: recursive
 
       - run: git fetch --force --tags
 
@@ -82,7 +83,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: opencode-cli
+          name: easybanana-cli
           path: packages/opencode/dist
 
     outputs:
@@ -113,16 +114,17 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ needs.publish.outputs.tag }}
+          submodules: recursive
 
       - uses: apple-actions/import-codesign-certs@v2
-        if: ${{ runner.os == 'macOS' }}
+        if: ${{ runner.os == 'macOS' && secrets.APPLE_CERTIFICATE != '' }}
         with:
           keychain: build
           p12-file-base64: ${{ secrets.APPLE_CERTIFICATE }}
           p12-password: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
 
       - name: Verify Certificate
-        if: ${{ runner.os == 'macOS' }}
+        if: ${{ runner.os == 'macOS' && secrets.APPLE_CERTIFICATE != '' }}
         run: |
           CERT_INFO=$(security find-identity -v -p codesigning build.keychain | grep "Developer ID Application")
           CERT_ID=$(echo "$CERT_INFO" | awk -F'"' '{print $2}')
@@ -130,7 +132,7 @@ jobs:
           echo "Certificate imported."
 
       - name: Setup Apple API Key
-        if: ${{ runner.os == 'macOS' }}
+        if: ${{ runner.os == 'macOS' && secrets.APPLE_API_KEY_PATH != '' }}
         run: |
           echo "${{ secrets.APPLE_API_KEY_PATH }}" > $RUNNER_TEMP/apple-api-key.p8
 
@@ -198,7 +200,7 @@ jobs:
           updaterJsonPreferNsis: true
           releaseId: ${{ needs.publish.outputs.release }}
           tagName: ${{ needs.publish.outputs.tag }}
-          releaseAssetNamePattern: opencode-desktop-[platform]-[arch][ext]
+          releaseAssetNamePattern: easybanana-desktop-[platform]-[arch][ext]
           releaseDraft: true
 
   publish-release:
@@ -212,6 +214,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ needs.publish.outputs.tag }}
+          submodules: recursive
 
       - uses: ./.github/actions/setup-bun
 

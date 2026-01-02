@@ -105,14 +105,14 @@ fn spawn_sidecar(app: &AppHandle, port: u32) -> CommandChild {
     #[cfg(target_os = "windows")]
     let (mut rx, child) = app
         .shell()
-        .sidecar("opencode-cli")
+        .sidecar("easybanana-cli")
         .unwrap()
         .env("OPENCODE_EXPERIMENTAL_ICON_DISCOVERY", "true")
         .env("OPENCODE_CLIENT", "desktop")
         .env("XDG_STATE_HOME", &state_dir)
         .args(["serve", &format!("--port={port}")])
         .spawn()
-        .expect("Failed to spawn opencode");
+        .expect("Failed to spawn easybanana");
 
     #[cfg(not(target_os = "windows"))]
     let (mut rx, child) = {
@@ -120,7 +120,7 @@ fn spawn_sidecar(app: &AppHandle, port: u32) -> CommandChild {
             .expect("Failed to get current exe")
             .parent()
             .expect("Failed to get parent dir")
-            .join("opencode-cli");
+            .join("easybanana-cli");
         let shell = get_user_shell();
         app.shell()
             .command(&shell)
@@ -133,7 +133,7 @@ fn spawn_sidecar(app: &AppHandle, port: u32) -> CommandChild {
                 &format!("{} serve --port={}", sidecar_path.display(), port),
             ])
             .spawn()
-            .expect("Failed to spawn opencode")
+            .expect("Failed to spawn easybanana")
     };
 
     tauri::async_runtime::spawn(async move {
@@ -223,7 +223,7 @@ pub fn run() {
                     loop {
                         if timestamp.elapsed() > Duration::from_secs(7) {
                             let res = app.dialog()
-                              .message("Failed to spawn OpenCode Server. Copy logs using the button below and send them to the team for assistance.")
+                              .message("Failed to spawn EasyBanana Server. Copy logs using the button below and send them to the team for assistance.")
                               .title("Startup Failed")
                               .buttons(MessageDialogButtons::OkCancelCustom("Copy Logs And Exit".to_string(), "Exit".to_string()))
                               .blocking_show_with_result();
@@ -264,7 +264,7 @@ pub fn run() {
 
                 let mut window_builder =
                     WebviewWindow::builder(&app, "main", WebviewUrl::App("/".into()))
-                        .title("OpenCode")
+                        .title("EasyBanana")
                         .inner_size(size.width as f64, size.height as f64)
                         .decorations(true)
                         .zoom_hotkeys_enabled(true)

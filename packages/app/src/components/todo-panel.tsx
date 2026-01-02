@@ -1,9 +1,9 @@
 import { createMemo, For, Show } from "solid-js"
 import { useSync } from "@/context/sync"
-import { Icon } from "@opencode-ai/ui/icon"
-import { Checkbox } from "@opencode-ai/ui/checkbox"
-import { ProgressCircle } from "@opencode-ai/ui/progress-circle"
-import type { Todo } from "@opencode-ai/sdk/v2/client"
+import { Icon } from "@easybanana/ui/icon"
+import { Checkbox } from "@easybanana/ui/checkbox"
+import { ProgressCircle } from "@easybanana/ui/progress-circle"
+import type { Todo } from "@easybanana/sdk/v2/client"
 
 interface TodoPanelProps {
   sessionID: string

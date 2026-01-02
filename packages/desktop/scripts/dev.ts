@@ -13,7 +13,7 @@ const viteProcess = spawn(["bun", "run", "dev:vite"], {
 
 async function buildCliIfNeeded() {
   const sidecarConfig = getCurrentSidecar(RUST_TARGET)
-  const binaryPath = `../opencode/dist/${sidecarConfig.ocBinary}/bin/opencode${process.platform === "win32" ? ".exe" : ""}`
+  const binaryPath = `../opencode/dist/${sidecarConfig.ocBinary}/bin/easybanana${process.platform === "win32" ? ".exe" : ""}`
   const fullBinaryPath = path.resolve(import.meta.dir, "..", binaryPath)
 
   if (fs.existsSync(fullBinaryPath)) {

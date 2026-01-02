@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+
+echo "🍌 Installing EasyBanana..."
+
+# Detect OS and architecture
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m)
+
+case "$ARCH" in
+  x86_64) ARCH="x64" ;;
+  aarch64|arm64) ARCH="arm64" ;;
+esac
+
+echo "Detected: $OS-$ARCH"
+
+# For now, install via bun
+if command -v bun &> /dev/null; then
+  echo "Installing via bun..."
+  bun install -g easybanana
+else
+  echo "Bun not found. Please install bun first:"
+  echo "  curl -fsSL https://bun.sh/install | bash"
+  exit 1
+fi
+
+echo "✅ EasyBanana installed successfully!"
+echo "Run 'easybanana' to get started."

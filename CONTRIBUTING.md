@@ -27,12 +27,41 @@ Want to take on an issue? Leave a comment and a maintainer may assign it to you 
 ## Developing OpenCode
 
 - Requirements: Bun 1.3+
+- This repository uses Git submodules. Make sure to clone with submodules or initialize them after cloning:
+
+  ```bash
+  # Clone with submodules
+  git clone --recursive https://github.com/SL-IT-AMAZING/easy-banana.git
+
+  # Or if already cloned, initialize submodules
+  git submodule update --init --recursive
+  ```
+
 - Install dependencies and start the dev server from the repo root:
 
   ```bash
   bun install
   bun dev
   ```
+
+### Working with Submodules
+
+This project includes `packages/oh-my-opencode` as a git submodule tracking the upstream repository.
+
+**Updating the submodule to latest:**
+```bash
+git submodule update --remote --merge
+```
+
+**Pulling changes with submodule updates:**
+```bash
+git pull --recurse-submodules
+```
+
+**Checking submodule status:**
+```bash
+git submodule status
+```
 
 ### Running against a different directory
 

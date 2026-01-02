@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 import { $ } from "bun"
-import { Script } from "@opencode-ai/script"
+import { Script } from "@easybanana/script"
 
 if (!Script.preview) {
   // Calculate SHA values

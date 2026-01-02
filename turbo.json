@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "opencode#test": {
+    "easybanana#test": {
       "dependsOn": ["^build"],
       "outputs": []
     }

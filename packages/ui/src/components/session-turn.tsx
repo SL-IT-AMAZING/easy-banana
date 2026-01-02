@@ -5,12 +5,12 @@ import {
   type PermissionRequest,
   TextPart,
   ToolPart,
-} from "@opencode-ai/sdk/v2/client"
+} from "@easybanana/sdk/v2/client"
 import { useData } from "../context"
 import { useDiffComponent } from "../context/diff"
-import { getDirectory, getFilename } from "@opencode-ai/util/path"
-import { checksum } from "@opencode-ai/util/encode"
-import { Binary } from "@opencode-ai/util/binary"
+import { getDirectory, getFilename } from "@easybanana/util/path"
+import { checksum } from "@easybanana/util/encode"
+import { Binary } from "@easybanana/util/binary"
 import { createEffect, createMemo, For, Match, on, onCleanup, ParentProps, Show, Switch } from "solid-js"
 import { createResizeObserver } from "@solid-primitives/resize-observer"
 import { DiffChanges } from "./diff-changes"

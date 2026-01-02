@@ -21,6 +21,8 @@ export function createOpencodeClient(config?: Config & { directory?: string }) {
   if (config?.directory) {
     config.headers = {
       ...config.headers,
+      // Use x-easybanana-directory (with x-opencode-directory for backward compatibility)
+      "x-easybanana-directory": config.directory,
       "x-opencode-directory": config.directory,
     }
   }

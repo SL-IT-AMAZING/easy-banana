@@ -13,11 +13,13 @@ const dir = path.resolve(__dirname, "..")
 process.chdir(dir)
 
 import pkg from "../package.json"
-import { Script } from "@opencode-ai/script"
+import { Script } from "@easybanana/script"
 
 const singleFlag = process.argv.includes("--single")
 const baselineFlag = process.argv.includes("--baseline")
 const skipInstall = process.argv.includes("--skip-install")
+
+const BINARY_NAME = "easybanana"
 
 const allTargets: {
   os: string
@@ -103,7 +105,7 @@ if (!skipInstall) {
 }
 for (const item of targets) {
   const name = [
-    pkg.name,
+    BINARY_NAME,
     // changing to win32 flags npm for some reason
     item.os === "win32" ? "windows" : item.os,
     item.arch,
@@ -133,8 +135,8 @@ for (const item of targets) {
       //@ts-ignore (bun types aren't up to date)
       autoloadTsconfig: true,
       autoloadPackageJson: true,
-      target: name.replace(pkg.name, "bun") as any,
-      outfile: `dist/${name}/bin/opencode`,
+      target: name.replace(BINARY_NAME, "bun") as any,
+      outfile: `dist/${name}/bin/easybanana`,
       execArgv: [`--user-agent=opencode/${Script.version}`, "--"],
       windows: {},
     },

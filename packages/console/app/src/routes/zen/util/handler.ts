@@ -1,16 +1,16 @@
 import type { APIEvent } from "@solidjs/start/server"
-import { and, Database, eq, isNull, lt, or, sql } from "@opencode-ai/console-core/drizzle/index.js"
-import { KeyTable } from "@opencode-ai/console-core/schema/key.sql.js"
-import { BillingTable, UsageTable } from "@opencode-ai/console-core/schema/billing.sql.js"
-import { centsToMicroCents } from "@opencode-ai/console-core/util/price.js"
-import { Identifier } from "@opencode-ai/console-core/identifier.js"
-import { Billing } from "@opencode-ai/console-core/billing.js"
-import { Actor } from "@opencode-ai/console-core/actor.js"
-import { WorkspaceTable } from "@opencode-ai/console-core/schema/workspace.sql.js"
-import { ZenData } from "@opencode-ai/console-core/model.js"
-import { UserTable } from "@opencode-ai/console-core/schema/user.sql.js"
-import { ModelTable } from "@opencode-ai/console-core/schema/model.sql.js"
-import { ProviderTable } from "@opencode-ai/console-core/schema/provider.sql.js"
+import { and, Database, eq, isNull, lt, or, sql } from "@easybanana/console-core/drizzle/index.js"
+import { KeyTable } from "@easybanana/console-core/schema/key.sql.js"
+import { BillingTable, UsageTable } from "@easybanana/console-core/schema/billing.sql.js"
+import { centsToMicroCents } from "@easybanana/console-core/util/price.js"
+import { Identifier } from "@easybanana/console-core/identifier.js"
+import { Billing } from "@easybanana/console-core/billing.js"
+import { Actor } from "@easybanana/console-core/actor.js"
+import { WorkspaceTable } from "@easybanana/console-core/schema/workspace.sql.js"
+import { ZenData } from "@easybanana/console-core/model.js"
+import { UserTable } from "@easybanana/console-core/schema/user.sql.js"
+import { ModelTable } from "@easybanana/console-core/schema/model.sql.js"
+import { ProviderTable } from "@easybanana/console-core/schema/provider.sql.js"
 import { logger } from "./logger"
 import { AuthError, CreditsError, MonthlyLimitError, UserLimitError, ModelError, RateLimitError } from "./error"
 import { createBodyConverter, createStreamPartConverter, createResponseConverter, UsageInfo } from "./provider/provider"
@@ -54,10 +54,15 @@ export async function handler(
     const model = opts.parseModel(url, body)
     const isStream = opts.parseIsStream(url, body)
     const ip = input.request.headers.get("x-real-ip") ?? ""
-    const sessionId = input.request.headers.get("x-opencode-session") ?? ""
-    const requestId = input.request.headers.get("x-opencode-request") ?? ""
-    const projectId = input.request.headers.get("x-opencode-project") ?? ""
-    const ocClient = input.request.headers.get("x-opencode-client") ?? ""
+    // Accept x-easybanana-* headers with fallback to x-opencode-* for backward compatibility
+    const sessionId =
+      input.request.headers.get("x-easybanana-session") ?? input.request.headers.get("x-opencode-session") ?? ""
+    const requestId =
+      input.request.headers.get("x-easybanana-request") ?? input.request.headers.get("x-opencode-request") ?? ""
+    const projectId =
+      input.request.headers.get("x-easybanana-project") ?? input.request.headers.get("x-opencode-project") ?? ""
+    const ocClient =
+      input.request.headers.get("x-easybanana-client") ?? input.request.headers.get("x-opencode-client") ?? ""
     logger.metric({
       is_tream: isStream,
       session: sessionId,
@@ -110,6 +115,10 @@ export async function handler(
           })
           headers.delete("host")
           headers.delete("content-length")
+          headers.delete("x-easybanana-request")
+          headers.delete("x-easybanana-session")
+          headers.delete("x-easybanana-project")
+          headers.delete("x-easybanana-client")
           headers.delete("x-opencode-request")
           headers.delete("x-opencode-session")
           headers.delete("x-opencode-project")

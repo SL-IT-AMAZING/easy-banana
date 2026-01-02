@@ -1,9 +1,9 @@
 import { createMemo, For, Show } from "solid-js"
 import { useSync } from "@/context/sync"
 import { useLocal } from "@/context/local"
-import { Icon, type IconProps } from "@opencode-ai/ui/icon"
-import { Tooltip } from "@opencode-ai/ui/tooltip"
-import type { Agent } from "@opencode-ai/sdk/v2/client"
+import { Icon, type IconProps } from "@easybanana/ui/icon"
+import { Tooltip } from "@easybanana/ui/tooltip"
+import type { Agent } from "@easybanana/sdk/v2/client"
 
 const AGENT_ICONS: Record<string, IconProps["name"]> = {
   sisyphus: "console",

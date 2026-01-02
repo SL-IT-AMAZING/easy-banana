@@ -1,37 +1,37 @@
-import { FileDiff, Message, Model, Part, Session, SessionStatus, UserMessage } from "@opencode-ai/sdk/v2"
-import { SessionTurn } from "@opencode-ai/ui/session-turn"
-import { SessionReview } from "@opencode-ai/ui/session-review"
-import { DataProvider } from "@opencode-ai/ui/context"
-import { DiffComponentProvider } from "@opencode-ai/ui/context/diff"
-import { CodeComponentProvider } from "@opencode-ai/ui/context/code"
-import { WorkerPoolProvider } from "@opencode-ai/ui/context/worker-pool"
+import { FileDiff, Message, Model, Part, Session, SessionStatus, UserMessage } from "@easybanana/sdk/v2"
+import { SessionTurn } from "@easybanana/ui/session-turn"
+import { SessionReview } from "@easybanana/ui/session-review"
+import { DataProvider } from "@easybanana/ui/context"
+import { DiffComponentProvider } from "@easybanana/ui/context/diff"
+import { CodeComponentProvider } from "@easybanana/ui/context/code"
+import { WorkerPoolProvider } from "@easybanana/ui/context/worker-pool"
 import { createAsync, query, useParams } from "@solidjs/router"
 import { createEffect, createMemo, ErrorBoundary, For, Match, Show, Switch } from "solid-js"
 import { Share } from "~/core/share"
-import { Logo, Mark } from "@opencode-ai/ui/logo"
-import { IconButton } from "@opencode-ai/ui/icon-button"
-import { ProviderIcon } from "@opencode-ai/ui/provider-icon"
-import { createDefaultOptions } from "@opencode-ai/ui/pierre"
-import { iife } from "@opencode-ai/util/iife"
-import { Binary } from "@opencode-ai/util/binary"
-import { NamedError } from "@opencode-ai/util/error"
+import { Logo, Mark } from "@easybanana/ui/logo"
+import { IconButton } from "@easybanana/ui/icon-button"
+import { ProviderIcon } from "@easybanana/ui/provider-icon"
+import { createDefaultOptions } from "@easybanana/ui/pierre"
+import { iife } from "@easybanana/util/iife"
+import { Binary } from "@easybanana/util/binary"
+import { NamedError } from "@easybanana/util/error"
 import { DateTime } from "luxon"
-import { SessionMessageRail } from "@opencode-ai/ui/session-message-rail"
+import { SessionMessageRail } from "@easybanana/ui/session-message-rail"
 import { createStore } from "solid-js/store"
 import z from "zod"
 import NotFound from "../[...404]"
-import { Tabs } from "@opencode-ai/ui/tabs"
+import { Tabs } from "@easybanana/ui/tabs"
 import { preloadMultiFileDiff, PreloadMultiFileDiffResult } from "@pierre/diffs/ssr"
-import { Diff as SSRDiff } from "@opencode-ai/ui/diff-ssr"
+import { Diff as SSRDiff } from "@easybanana/ui/diff-ssr"
 import { clientOnly } from "@solidjs/start"
-import { type IconName } from "@opencode-ai/ui/icons/provider"
+import { type IconName } from "@easybanana/ui/icons/provider"
 import { Meta, Title } from "@solidjs/meta"
 import { Base64 } from "js-base64"
 
-const ClientOnlyDiff = clientOnly(() => import("@opencode-ai/ui/diff").then((m) => ({ default: m.Diff })))
-const ClientOnlyCode = clientOnly(() => import("@opencode-ai/ui/code").then((m) => ({ default: m.Code })))
+const ClientOnlyDiff = clientOnly(() => import("@easybanana/ui/diff").then((m) => ({ default: m.Diff })))
+const ClientOnlyCode = clientOnly(() => import("@easybanana/ui/code").then((m) => ({ default: m.Code })))
 const ClientOnlyWorkerPoolProvider = clientOnly(() =>
-  import("@opencode-ai/ui/pierre/worker").then((m) => ({
+  import("@easybanana/ui/pierre/worker").then((m) => ({
     default: (props: { children: any }) => (
       <WorkerPoolProvider pools={m.getWorkerPools()}>{props.children}</WorkerPoolProvider>
     ),

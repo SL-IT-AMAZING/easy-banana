@@ -7,7 +7,7 @@ import { Log } from "../util/log"
 import { BunProc } from "../bun"
 import { Plugin } from "../plugin"
 import { ModelsDev } from "./models"
-import { NamedError } from "@opencode-ai/util/error"
+import { NamedError } from "@easybanana/util/error"
 import { Auth } from "../auth"
 import { Env } from "../env"
 import { Instance } from "../project/instance"
@@ -272,7 +272,7 @@ export namespace Provider {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://opencode.ai/",
+            "HTTP-Referer": "https://easy-banana.com/",
             "X-Title": "opencode",
           },
         },
@@ -283,7 +283,7 @@ export namespace Provider {
         autoload: false,
         options: {
           headers: {
-            "http-referer": "https://opencode.ai/",
+            "http-referer": "https://easy-banana.com/",
             "x-title": "opencode",
           },
         },
@@ -350,7 +350,7 @@ export namespace Provider {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://opencode.ai/",
+            "HTTP-Referer": "https://easy-banana.com/",
             "X-Title": "opencode",
           },
         },
@@ -382,7 +382,7 @@ export namespace Provider {
             // Cloudflare AI Gateway uses cf-aig-authorization for authenticated gateways
             // This enables Unified Billing where Cloudflare handles upstream provider auth
             ...(apiToken ? { "cf-aig-authorization": `Bearer ${apiToken}` } : {}),
-            "HTTP-Referer": "https://opencode.ai/",
+            "HTTP-Referer": "https://easy-banana.com/",
             "X-Title": "opencode",
           },
           // Custom fetch to strip Authorization header - AI Gateway uses cf-aig-authorization instead

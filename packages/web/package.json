@@ -1,5 +1,5 @@
 {
-  "name": "@opencode-ai/web",
+  "name": "@easybanana/web",
   "type": "module",
   "version": "1.0.223",
   "scripts": {
@@ -33,7 +33,7 @@
     "toolbeam-docs-theme": "0.4.8"
   },
   "devDependencies": {
-    "opencode": "workspace:*",
+    "easybanana": "workspace:*",
     "@types/node": "catalog:",
     "typescript": "catalog:"
   }

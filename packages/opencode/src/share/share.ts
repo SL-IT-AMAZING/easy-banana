@@ -67,7 +67,7 @@ export namespace Share {
 
   export const URL =
     process.env["OPENCODE_API"] ??
-    (Installation.isPreview() || Installation.isLocal() ? "https://api.dev.opencode.ai" : "https://api.opencode.ai")
+    (Installation.isPreview() || Installation.isLocal() ? "https://api.dev.easy-banana.com" : "https://api.easy-banana.com")
 
   export async function create(sessionID: string) {
     return fetch(`${URL}/share_create`, {
