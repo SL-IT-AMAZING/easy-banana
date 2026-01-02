@@ -515,7 +515,7 @@ function App() {
         DialogAlert.show(
           dialog,
           "Warning",
-          "While openrouter is a convenient way to access LLMs your request will often be routed to subpar providers that do not work well in our testing.\n\nFor reliable access to models check out OpenCode Zen\nhttps://easy-banana.com/zen",
+          "While openrouter is a convenient way to access LLMs your request will often be routed to subpar providers that do not work well in our testing.\n\nFor reliable access to models check out Easy Banana Zen\nhttps://easy-banana.com/zen",
         ).then(() => kv.set("openrouter_warning", true))
       })
     }
@@ -569,7 +569,7 @@ function App() {
     toast.show({
       variant: "success",
       title: "Update Complete",
-      message: `OpenCode updated to v${evt.properties.version}`,
+      message: `Easy Banana updated to v${evt.properties.version}`,
       duration: 5000,
     })
   })
@@ -578,7 +578,7 @@ function App() {
     toast.show({
       variant: "info",
       title: "Update Available",
-      message: `OpenCode v${evt.properties.version} is available. Run 'opencode upgrade' to update manually.`,
+      message: `Easy Banana v${evt.properties.version} is available. Run 'easybanana upgrade' to update manually.`,
       duration: 10000,
     })
   })

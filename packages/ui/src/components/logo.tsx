@@ -7,8 +7,8 @@ export const Mark = (props: { class?: string }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path data-slot="logo-logo-mark-shadow" d="M12 16H4V8H12V16Z" fill="var(--icon-weak-base)" />
-      <path data-slot="logo-logo-mark-o" d="M12 4H4V16H12V4ZM16 20H0V0H16V20Z" fill="var(--icon-strong-base)" />
+      <path data-slot="logo-logo-mark-shadow" d="M4 12H10V16H4Z" fill="var(--icon-weak-base)" />
+      <path data-slot="logo-logo-mark-o" d="M0 0H12V4H4V8H10V12H4V16H12V20H0Z" fill="var(--icon-strong-base)" />
     </svg>
   )
 }
@@ -17,27 +17,41 @@ export const Logo = (props: { class?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 234 42"
+      viewBox="0 0 294 42"
       fill="none"
       classList={{ [props.class ?? ""]: !!props.class }}
     >
       <g>
-        <path d="M18 30H6V18H18V30Z" fill="var(--icon-weak-base)" />
-        <path d="M18 12H6V30H18V12ZM24 36H0V6H24V36Z" fill="var(--icon-base)" />
-        <path d="M48 30H36V18H48V30Z" fill="var(--icon-weak-base)" />
-        <path d="M36 30H48V12H36V30ZM54 36H36V42H30V6H54V36Z" fill="var(--icon-base)" />
-        <path d="M84 24V30H66V24H84Z" fill="var(--icon-weak-base)" />
-        <path d="M84 24H66V30H84V36H60V6H84V24ZM66 18H78V12H66V18Z" fill="var(--icon-base)" />
-        <path d="M108 36H96V18H108V36Z" fill="var(--icon-weak-base)" />
-        <path d="M108 12H96V36H90V6H108V12ZM114 36H108V12H114V36Z" fill="var(--icon-base)" />
-        <path d="M144 30H126V18H144V30Z" fill="var(--icon-weak-base)" />
-        <path d="M144 12H126V30H144V36H120V6H144V12Z" fill="var(--icon-strong-base)" />
-        <path d="M168 30H156V18H168V30Z" fill="var(--icon-weak-base)" />
-        <path d="M168 12H156V30H168V12ZM174 36H150V6H174V36Z" fill="var(--icon-strong-base)" />
-        <path d="M198 30H186V18H198V30Z" fill="var(--icon-weak-base)" />
-        <path d="M198 12H186V30H198V12ZM204 36H180V6H198V0H204V36Z" fill="var(--icon-strong-base)" />
-        <path d="M234 24V30H216V24H234Z" fill="var(--icon-weak-base)" />
-        <path d="M216 12V18H228V12H216ZM234 24H216V30H234V36H210V6H234V24Z" fill="var(--icon-strong-base)" />
+        {/* E */}
+        <path d="M6 18H18V24H6V18Z" fill="var(--icon-weak-base)" />
+        <path d="M0 6H24V12H6V18H18V24H6V30H24V36H0V6Z" fill="var(--icon-base)" />
+        {/* A */}
+        <path d="M36 24H48V30H36V24Z" fill="var(--icon-weak-base)" />
+        <path d="M36 6H48V12H54V36H48V24H36V36H30V12H36V6ZM36 12V18H48V12H36Z" fill="var(--icon-base)" />
+        {/* S */}
+        <path d="M66 18H78V24H66V18Z" fill="var(--icon-weak-base)" />
+        <path d="M60 6H84V12H66V18H78V24H84V36H60V30H78V24H66V18H60V6Z" fill="var(--icon-base)" />
+        {/* Y */}
+        <path d="M99 24H105V30H99V24Z" fill="var(--icon-weak-base)" />
+        <path d="M90 6H96V18H99V24H105V18H108V6H114V18H108V24H105V36H99V24H96V18H90V6Z" fill="var(--icon-base)" />
+        {/* B */}
+        <path d="M126 18H138V24H126V18Z" fill="var(--icon-weak-base)" />
+        <path d="M120 6H138V12H144V18H138V24H144V30H138V36H120V6ZM126 12V18H138V12H126ZM126 24V30H138V24H126Z" fill="var(--icon-strong-base)" />
+        {/* A */}
+        <path d="M156 24H168V30H156V24Z" fill="var(--icon-weak-base)" />
+        <path d="M156 6H168V12H174V36H168V24H156V36H150V12H156V6ZM156 12V18H168V12H156Z" fill="var(--icon-strong-base)" />
+        {/* N */}
+        <path d="M186 18H198V24H186V18Z" fill="var(--icon-weak-base)" />
+        <path d="M180 6H186V36H180Z M186 12H192V24H186Z M192 18H198V30H192Z M198 6H204V36H198Z" fill="var(--icon-strong-base)" />
+        {/* A */}
+        <path d="M216 24H228V30H216V24Z" fill="var(--icon-weak-base)" />
+        <path d="M216 6H228V12H234V36H228V24H216V36H210V12H216V6ZM216 12V18H228V12H216Z" fill="var(--icon-strong-base)" />
+        {/* N */}
+        <path d="M246 18H258V24H246V18Z" fill="var(--icon-weak-base)" />
+        <path d="M240 6H246V36H240Z M246 12H252V24H246Z M252 18H258V30H252Z M258 6H264V36H258Z" fill="var(--icon-strong-base)" />
+        {/* A */}
+        <path d="M276 24H288V30H276V24Z" fill="var(--icon-weak-base)" />
+        <path d="M276 6H288V12H294V36H288V24H276V36H270V12H276V6ZM276 12V18H288V12H276Z" fill="var(--icon-strong-base)" />
       </g>
     </svg>
   )
