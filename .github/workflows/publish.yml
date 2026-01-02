@@ -46,6 +46,7 @@ jobs:
         run: |
           bun install
           cd packages/oh-my-opencode
+          bun install
           bun run build
 
       - name: Install OpenCode
