@@ -1,0 +1,5 @@
+[submodule "packages/oh-my-opencode"]
+	path = packages/oh-my-opencode
+	url = https://github.com/code-yeongyu/oh-my-opencode.git
+	branch = main
+	shallow = true
