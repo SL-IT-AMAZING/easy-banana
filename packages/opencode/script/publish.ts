@@ -39,19 +39,26 @@ await Bun.file(`./dist/${BINARY_NAME}/package.json`).write(
 )
 
 const tags = [Script.channel]
+const skipNpmPublish = process.env.SKIP_NPM_PUBLISH === "true"
 
 const tasks = Object.entries(binaries).map(async ([name]) => {
   if (process.platform !== "win32") {
     await $`chmod -R 755 .`.cwd(`./dist/${name}`)
   }
   await $`bun pm pack`.cwd(`./dist/${name}`)
-  for (const tag of tags) {
-    await $`npm publish *.tgz --access public --tag ${tag}`.cwd(`./dist/${name}`)
+  if (!skipNpmPublish) {
+    for (const tag of tags) {
+      await $`npm publish *.tgz --access public --tag ${tag}`.cwd(`./dist/${name}`)
+    }
   }
 })
 await Promise.all(tasks)
-for (const tag of tags) {
-  await $`cd ./dist/${BINARY_NAME} && bun pm pack && npm publish *.tgz --access public --tag ${tag}`
+if (!skipNpmPublish) {
+  for (const tag of tags) {
+    await $`cd ./dist/${BINARY_NAME} && bun pm pack && npm publish *.tgz --access public --tag ${tag}`
+  }
+} else {
+  console.log("Skipping npm publish (SKIP_NPM_PUBLISH=true)")
 }
 
 if (!Script.preview) {
