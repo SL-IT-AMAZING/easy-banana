@@ -7,6 +7,7 @@ import { Server } from "../server/server"
 import { BunProc } from "../bun"
 import { Instance } from "../project/instance"
 import { Flag } from "../flag/flag"
+import * as OhMyOpenCode from "oh-my-opencode"
 
 export namespace Plugin {
   const log = Log.create({ service: "plugin" })
@@ -32,6 +33,16 @@ export namespace Plugin {
       plugins.push("opencode-copilot-auth@0.0.9")
       plugins.push("opencode-anthropic-auth@0.0.5")
     }
+    if (!Flag.OPENCODE_DISABLE_DEFAULT_PLUGINS) {
+      log.info("loading oh-my-opencode plugin")
+      for (const [_name, fn] of Object.entries<PluginInstance>(OhMyOpenCode)) {
+        if (typeof fn === "function") {
+          const init = await fn(input)
+          hooks.push(init)
+        }
+      }
+    }
+
     for (let plugin of plugins) {
       log.info("loading plugin", { path: plugin })
       if (!plugin.startsWith("file://")) {

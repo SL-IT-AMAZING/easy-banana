@@ -69,6 +69,8 @@ import { Button } from "@opencode-ai/ui/button"
 import { DialogSelectServer } from "@/components/dialog-select-server"
 import { SessionLspIndicator } from "@/components/session-lsp-indicator"
 import { SessionMcpIndicator } from "@/components/session-mcp-indicator"
+import { BackgroundTaskPanel } from "@/components/background-task-panel"
+import { TodoPanel } from "@/components/todo-panel"
 import { useGlobalSDK } from "@/context/global-sdk"
 import { Popover } from "@opencode-ai/ui/popover"
 import { Select } from "@opencode-ai/ui/select"
@@ -1349,6 +1351,12 @@ export default function Page() {
                 "max-w-200": !showTabs(),
               }}
             >
+              <Show when={params.id}>
+                <div class="flex flex-col gap-2 mb-2">
+                  <TodoPanel sessionID={params.id} />
+                  <BackgroundTaskPanel sessionID={params.id} directory={sync.directory} />
+                </div>
+              </Show>
               <PromptInput
                 ref={(el) => {
                   inputRef = el
