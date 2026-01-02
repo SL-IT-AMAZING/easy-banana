@@ -110,6 +110,8 @@ function createGlobalSync() {
 
   async function loadSessions(directory: string) {
     const [store, setStore] = child(directory)
+    // Normalize directory for comparison (case-insensitive on Windows)
+    const normalizedDir = directory.toLowerCase().replace(/\\/g, "/").replace(/\/+$/, "")
     globalSDK.client.session
       .list({ directory })
       .then((x) => {
@@ -117,6 +119,11 @@ function createGlobalSync() {
         const nonArchived = (x.data ?? [])
           .filter((s) => !!s?.id)
           .filter((s) => !s.time?.archived)
+          // Filter sessions to only include those from the exact directory
+          .filter((s) => {
+            const sessionDir = (s.directory ?? "").toLowerCase().replace(/\\/g, "/").replace(/\/+$/, "")
+            return sessionDir === normalizedDir
+          })
           .slice()
           .sort((a, b) => a.id.localeCompare(b.id))
         // Include up to the limit, plus any updated in the last 4 hours
@@ -240,6 +247,12 @@ function createGlobalSync() {
         break
       }
       case "session.updated": {
+        // Verify session belongs to this directory (case-insensitive comparison for Windows)
+        const sessionDir = (event.properties.info.directory ?? "").toLowerCase().replace(/\\/g, "/").replace(/\/+$/, "")
+        const storeDir = directory.toLowerCase().replace(/\\/g, "/").replace(/\/+$/, "")
+        if (sessionDir !== storeDir) {
+          break // Skip sessions that don't belong to this directory
+        }
         const result = Binary.search(store.session, event.properties.info.id, (s) => s.id)
         if (event.properties.info.time.archived) {
           if (result.found) {
