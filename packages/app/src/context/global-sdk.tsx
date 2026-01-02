@@ -1,5 +1,5 @@
-import { createOpencodeClient, type Event } from "@opencode-ai/sdk/v2/client"
-import { createSimpleContext } from "@opencode-ai/ui/context"
+import { createOpencodeClient, type Event } from "@easybanana/sdk/v2/client"
+import { createSimpleContext } from "@easybanana/ui/context"
 import { createGlobalEmitter } from "@solid-primitives/event-bus"
 import { onCleanup } from "solid-js"
 import { usePlatform } from "./platform"

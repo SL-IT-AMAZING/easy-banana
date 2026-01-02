@@ -1,0 +1,14 @@
+{
+  "name": "@opencode-ai/sdk",
+  "version": "1.0.224",
+  "type": "module",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@easybanana/sdk": "workspace:*"
+  }
+}

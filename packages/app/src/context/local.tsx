@@ -1,15 +1,15 @@
 import { createStore, produce, reconcile } from "solid-js/store"
 import { batch, createMemo } from "solid-js"
 import { filter, firstBy, flat, groupBy, mapValues, pipe, uniqueBy, values } from "remeda"
-import type { FileContent, FileNode, Model, Provider, File as FileStatus } from "@opencode-ai/sdk/v2"
-import { createSimpleContext } from "@opencode-ai/ui/context"
+import type { FileContent, FileNode, Model, Provider, File as FileStatus } from "@easybanana/sdk/v2"
+import { createSimpleContext } from "@easybanana/ui/context"
 import { useSDK } from "./sdk"
 import { useSync } from "./sync"
-import { base64Encode } from "@opencode-ai/util/encode"
+import { base64Encode } from "@easybanana/util/encode"
 import { useProviders } from "@/hooks/use-providers"
 import { DateTime } from "luxon"
 import { persisted } from "@/utils/persist"
-import { showToast } from "@opencode-ai/ui/toast"
+import { showToast } from "@easybanana/ui/toast"
 
 export type LocalFile = FileNode &
   Partial<{

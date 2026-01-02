@@ -11,7 +11,7 @@ import { Session } from "../session"
 import z from "zod"
 import { Provider } from "../provider/provider"
 import { filter, mapValues, sortBy, pipe } from "remeda"
-import { NamedError } from "@opencode-ai/util/error"
+import { NamedError } from "@easybanana/util/error"
 import { ModelsDev } from "../provider/models"
 import { Ripgrep } from "../file/ripgrep"
 import { Config } from "../config/config"
@@ -114,7 +114,7 @@ export namespace Server {
             if (input.startsWith("http://127.0.0.1:")) return input
             if (input === "tauri://localhost" || input === "http://tauri.localhost") return input
 
-            // *.opencode.ai (https only, adjust if needed)
+            // *.easy-banana.com (https only, adjust if needed)
             if (/^https:\/\/([a-z0-9-]+\.)*opencode\.ai$/.test(input)) {
               return input
             }
@@ -244,7 +244,12 @@ export namespace Server {
         },
       )
       .use(async (c, next) => {
-        const directory = c.req.query("directory") || c.req.header("x-opencode-directory") || process.cwd()
+        // Accept x-easybanana-directory with fallback to x-opencode-directory for backward compatibility
+        const directory =
+          c.req.query("directory") ||
+          c.req.header("x-easybanana-directory") ||
+          c.req.header("x-opencode-directory") ||
+          process.cwd()
         return Instance.provide({
           directory,
           init: InstanceBootstrap,
@@ -258,9 +263,9 @@ export namespace Server {
         openAPIRouteHandler(app, {
           documentation: {
             info: {
-              title: "opencode",
+              title: "easybanana",
               version: "0.0.3",
-              description: "opencode api",
+              description: "easybanana api",
             },
             openapi: "3.1.1",
           },
@@ -2692,10 +2697,10 @@ export namespace Server {
       )
       .all("/*", async (c) => {
         const path = c.req.path
-        const response = await proxy(`https://app.opencode.ai${path}`, {
+        const response = await proxy(`https://app.easy-banana.com${path}`, {
           ...c.req,
           headers: {
-            host: "app.opencode.ai",
+            host: "app.easy-banana.com",
           },
         })
         // Cloudflare doesn't return Content-Type for static assets, so we need to add it

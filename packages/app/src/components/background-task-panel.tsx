@@ -1,12 +1,12 @@
 import { createMemo, For, Show } from "solid-js"
 import { useSync } from "@/context/sync"
 import { useGlobalSync } from "@/context/global-sync"
-import { Icon } from "@opencode-ai/ui/icon"
-import { IconButton } from "@opencode-ai/ui/icon-button"
-import { Spinner } from "@opencode-ai/ui/spinner"
-import { Tooltip } from "@opencode-ai/ui/tooltip"
+import { Icon } from "@easybanana/ui/icon"
+import { IconButton } from "@easybanana/ui/icon-button"
+import { Spinner } from "@easybanana/ui/spinner"
+import { Tooltip } from "@easybanana/ui/tooltip"
 import { DateTime } from "luxon"
-import type { Session } from "@opencode-ai/sdk/v2/client"
+import type { Session } from "@easybanana/sdk/v2/client"
 
 interface BackgroundTaskPanelProps {
   sessionID: string

@@ -4,7 +4,7 @@ export const TIPS = [
   "Press {highlight}Tab{/highlight} to cycle between Build (full access) and Plan (read-only) agents.",
   "Use {highlight}/undo{/highlight} to revert the last message and any file changes made by OpenCode.",
   "Use {highlight}/redo{/highlight} to restore previously undone messages and file changes.",
-  "Run {highlight}/share{/highlight} to create a public link to your conversation at opencode.ai.",
+  "Run {highlight}/share{/highlight} to create a public link to your conversation at easy-banana.com.",
   "Drag and drop images into the terminal to add them as context for your prompts.",
   "Press {highlight}Ctrl+V{/highlight} to paste images from your clipboard directly into the prompt.",
   "Press {highlight}Ctrl+X E{/highlight} or {highlight}/editor{/highlight} to compose messages in your external editor.",
