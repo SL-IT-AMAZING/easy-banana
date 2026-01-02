@@ -46,6 +46,7 @@ jobs:
         run: |
           bun install
           cd packages/oh-my-opencode
+          rm -rf node_modules/@opencode-ai
           mkdir -p node_modules/@opencode-ai
           ln -sf ../../../opencode-ai-plugin-shim node_modules/@opencode-ai/plugin
           ln -sf ../../../opencode-ai-sdk-shim node_modules/@opencode-ai/sdk
