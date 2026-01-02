@@ -42,6 +42,12 @@ jobs:
 
       - uses: ./.github/actions/setup-bun
 
+      - name: Build oh-my-opencode submodule
+        run: |
+          cd packages/oh-my-opencode
+          bun install
+          bun run build
+
       - name: Install OpenCode
         if: inputs.bump || inputs.version
         run: bun i -g opencode-ai@1.0.169
