@@ -237,6 +237,22 @@ function Header(props: { onMobileMenuToggle?: () => void }) {
                 </div>
               </Button>
             </TooltipKeybind>
+            <TooltipKeybind
+              class="hidden md:block shrink-0"
+              title="Toggle todos"
+              keybind={command.keybind("todo.toggle")}
+            >
+              <Button variant="ghost" class="group/todo-toggle size-6 p-0" onClick={layout.todo.toggle}>
+                <Icon
+                  size="small"
+                  name="checklist"
+                  classList={{
+                    "text-icon-base": layout.todo.opened(),
+                    "text-icon-weak": !layout.todo.opened(),
+                  }}
+                />
+              </Button>
+            </TooltipKeybind>
           </div>
           <Show when={shareEnabled() && currentSession()}>
             <Popover
@@ -470,6 +486,15 @@ export default function Page() {
       category: "View",
       keybind: "mod+shift+r",
       onSelect: () => layout.review.toggle(),
+    },
+    {
+      id: "todo.toggle",
+      title: "Toggle todos",
+      description: "Show or hide the todo panel",
+      category: "View",
+      keybind: "mod+shift+t",
+      slash: "todos",
+      onSelect: () => layout.todo.toggle(),
     },
     {
       id: "terminal.new",
@@ -1280,6 +1305,69 @@ export default function Page() {
     )
   }
 
+  const TodoPanelContent = (props: { sessionID: string }) => {
+    const todos = createMemo(() => sync.data.todo[props.sessionID] ?? [])
+
+    const TodoItem = (itemProps: { todo: typeof todos extends () => (infer T)[] ? T : never }) => {
+      const isCompleted = () => itemProps.todo.status === "completed"
+      const isCancelled = () => itemProps.todo.status === "cancelled"
+      const isInProgress = () => itemProps.todo.status === "in_progress"
+
+      return (
+        <div
+          classList={{
+            "flex items-start gap-2 px-3 py-2 rounded-md transition-colors": true,
+            "bg-surface-success-base/10": isCompleted(),
+            "bg-surface-warning-base/10": isInProgress(),
+            "opacity-50": isCancelled(),
+          }}
+        >
+          <div class="mt-0.5">
+            <Show
+              when={isCompleted()}
+              fallback={
+                <Show
+                  when={isInProgress()}
+                  fallback={<div class="w-4 h-4 rounded border border-border-base" />}
+                >
+                  <div class="w-4 h-4 rounded border-2 border-text-warning animate-pulse" />
+                </Show>
+              }
+            >
+              <Icon name="check" size="small" class="text-text-success" />
+            </Show>
+          </div>
+          <div
+            classList={{
+              "text-13-regular flex-1": true,
+              "text-text-weak line-through": isCompleted() || isCancelled(),
+              "text-text-strong": isInProgress(),
+              "text-text-base": !isCompleted() && !isCancelled() && !isInProgress(),
+            }}
+          >
+            {itemProps.todo.content}
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <Show
+        when={todos().length > 0}
+        fallback={
+          <div class="flex flex-col items-center justify-center h-full text-text-weak">
+            <Icon name="checklist" size="large" class="mb-2 opacity-50" />
+            <div class="text-13-regular">No tasks yet</div>
+          </div>
+        }
+      >
+        <div class="flex flex-col gap-1">
+          <For each={todos()}>{(todo) => <TodoItem todo={todo} />}</For>
+        </div>
+      </Show>
+    )
+  }
+
   return (
     <div class="relative bg-background-base size-full overflow-hidden flex flex-col">
       <Header />
@@ -1354,7 +1442,6 @@ export default function Page() {
               <Show when={params.id}>
                 {(id) => (
                   <div class="flex flex-col gap-2 mb-2">
-                    <TodoPanel sessionID={id()} />
                     <BackgroundTaskPanel sessionID={id()} directory={sync.directory} />
                   </div>
                 )}
@@ -1522,6 +1609,31 @@ export default function Page() {
                 </Show>
               </DragOverlay>
             </DragDropProvider>
+          </div>
+        </Show>
+
+        <Show when={layout.todo.opened() && params.id}>
+          <div
+            class="relative shrink-0 h-full border-l border-border-weak-base bg-background-base flex flex-col"
+            style={{ width: `${layout.todo.width()}px` }}
+          >
+            <ResizeHandle
+              direction="horizontal"
+              size={layout.todo.width()}
+              min={240}
+              max={480}
+              onResize={layout.todo.resize}
+            />
+            <div class="flex items-center justify-between px-4 py-3 border-b border-border-weak-base">
+              <div class="flex items-center gap-2">
+                <Icon name="checklist" size="small" class="text-icon-weak" />
+                <span class="text-14-medium text-text-strong">Todos</span>
+              </div>
+              <IconButton icon="close" variant="ghost" onClick={layout.todo.close} />
+            </div>
+            <div class="flex-1 overflow-y-auto p-4">
+              <TodoPanelContent sessionID={params.id!} />
+            </div>
           </div>
         </Show>
       </div>

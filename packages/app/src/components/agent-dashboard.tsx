@@ -7,6 +7,7 @@ import type { Agent } from "@opencode-ai/sdk/v2/client"
 
 const AGENT_ICONS: Record<string, IconProps["name"]> = {
   sisyphus: "console",
+  Sisyphus: "console",
   oracle: "brain",
   librarian: "folder",
   explore: "magnifying-glass",
@@ -16,10 +17,12 @@ const AGENT_ICONS: Record<string, IconProps["name"]> = {
   build: "settings-gear",
   general: "bubble-5",
   plan: "checklist",
+  "Planner-Sisyphus": "checklist",
 }
 
 const AGENT_DESCRIPTIONS: Record<string, string> = {
   sisyphus: "Primary orchestrator - keeps rolling until done",
+  Sisyphus: "Primary orchestrator - keeps rolling until done",
   oracle: "Strategic advisor for design and debugging",
   librarian: "Multi-repo analysis and documentation lookup",
   explore: "Blazing-fast codebase exploration",
@@ -29,6 +32,7 @@ const AGENT_DESCRIPTIONS: Record<string, string> = {
   build: "Build and deployment tasks",
   general: "General purpose agent",
   plan: "Planning and task breakdown",
+  "Planner-Sisyphus": "Detailed planning agent (OhMyOpenCode)",
 }
 
 function AgentCard(props: { agent: Agent; isActive: boolean; onClick: () => void }) {

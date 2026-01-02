@@ -53,6 +53,10 @@ export const { use: useLayout, provider: LayoutProvider } = createSimpleContext(
           opened: true,
           diffStyle: "split" as ReviewDiffStyle,
         },
+        todo: {
+          opened: false,
+          width: 320,
+        },
         session: {
           width: 600,
         },
@@ -175,6 +179,38 @@ export const { use: useLayout, provider: LayoutProvider } = createSimpleContext(
         },
         toggle() {
           setStore("review", "opened", (x) => !x)
+        },
+      },
+      todo: {
+        opened: createMemo(() => store.todo?.opened ?? false),
+        width: createMemo(() => store.todo?.width ?? 320),
+        open() {
+          if (!store.todo) {
+            setStore("todo", { opened: true, width: 320 })
+            return
+          }
+          setStore("todo", "opened", true)
+        },
+        close() {
+          if (!store.todo) {
+            setStore("todo", { opened: false, width: 320 })
+            return
+          }
+          setStore("todo", "opened", false)
+        },
+        toggle() {
+          if (!store.todo) {
+            setStore("todo", { opened: true, width: 320 })
+            return
+          }
+          setStore("todo", "opened", (x) => !x)
+        },
+        resize(width: number) {
+          if (!store.todo) {
+            setStore("todo", { opened: true, width })
+            return
+          }
+          setStore("todo", "width", width)
         },
       },
       session: {
