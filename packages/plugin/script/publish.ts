@@ -17,5 +17,10 @@ for (const [key, value] of Object.entries(pkg.exports)) {
   }
 }
 await Bun.write("package.json", JSON.stringify(pkg, null, 2))
-await $`bun pm pack && npm publish *.tgz --tag ${Script.channel} --access public`
+await $`bun pm pack`
+if (process.env.SKIP_NPM_PUBLISH !== "true") {
+  await $`npm publish *.tgz --tag ${Script.channel} --access public`
+} else {
+  console.log("Skipping npm publish (SKIP_NPM_PUBLISH=true)")
+}
 await Bun.write("package.json", JSON.stringify(original, null, 2))
