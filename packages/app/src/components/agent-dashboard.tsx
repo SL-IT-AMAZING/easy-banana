@@ -6,15 +6,15 @@ import { Tooltip } from "@opencode-ai/ui/tooltip"
 import type { Agent } from "@opencode-ai/sdk/v2/client"
 
 const AGENT_ICONS: Record<string, IconProps["name"]> = {
-  sisyphus: "user",
+  sisyphus: "console",
   oracle: "brain",
-  librarian: "book",
+  librarian: "folder",
   explore: "magnifying-glass",
-  "frontend-ui-ux-engineer": "palette",
-  "document-writer": "file-text",
-  "multimodal-looker": "eye",
-  build: "hammer",
-  general: "user",
+  "frontend-ui-ux-engineer": "code",
+  "document-writer": "pencil-line",
+  "multimodal-looker": "photo",
+  build: "settings-gear",
+  general: "bubble-5",
   plan: "checklist",
 }
 
@@ -36,7 +36,7 @@ function AgentCard(props: { agent: Agent; isActive: boolean; onClick: () => void
   const description = () => AGENT_DESCRIPTIONS[props.agent.name] ?? props.agent.description ?? ""
 
   return (
-    <Tooltip title={description()}>
+    <Tooltip value={description()}>
       <button
         type="button"
         onClick={props.onClick}
@@ -68,7 +68,7 @@ export function AgentDashboard() {
   return (
     <div data-component="agent-dashboard" class="flex flex-col gap-3">
       <div class="flex items-center gap-2">
-        <Icon name="users" size="small" class="text-text-weak" />
+        <Icon name="bubble-5" size="small" class="text-text-weak" />
         <span class="text-12-medium text-text-weak">Agents</span>
       </div>
 

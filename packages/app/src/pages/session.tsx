@@ -1352,10 +1352,12 @@ export default function Page() {
               }}
             >
               <Show when={params.id}>
-                <div class="flex flex-col gap-2 mb-2">
-                  <TodoPanel sessionID={params.id} />
-                  <BackgroundTaskPanel sessionID={params.id} directory={sync.directory} />
-                </div>
+                {(id) => (
+                  <div class="flex flex-col gap-2 mb-2">
+                    <TodoPanel sessionID={id()} />
+                    <BackgroundTaskPanel sessionID={id()} directory={sync.directory} />
+                  </div>
+                )}
               </Show>
               <PromptInput
                 ref={(el) => {

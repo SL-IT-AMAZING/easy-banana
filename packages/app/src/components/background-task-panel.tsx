@@ -34,13 +34,13 @@ function TaskStatusIcon(props: { status: string }) {
       fallback={
         <Show
           when={props.status === "completed"}
-          fallback={<Icon name="alert-triangle" size="small" class="text-text-error" />}
+          fallback={<Icon name="circle-x" size="small" class="text-text-error" />}
         >
           <Icon name="check" size="small" class="text-text-success" />
         </Show>
       }
     >
-      <Spinner size="small" />
+      <Spinner class="w-4 h-4" />
     </Show>
   )
 }
@@ -64,10 +64,10 @@ function TaskItem(props: { task: Session; onCancel?: () => void }) {
         </div>
       </div>
       <Show when={isRunning()}>
-        <Tooltip title="Cancel task">
+        <Tooltip value="Cancel task">
           <IconButton
             icon="close"
-            size="small"
+            size="normal"
             variant="ghost"
             onClick={props.onCancel}
           />

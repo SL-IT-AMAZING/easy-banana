@@ -52,7 +52,7 @@ function TodoItem(props: { todo: Todo }) {
         {props.todo.content}
       </div>
       <Show when={props.todo.priority === "high"}>
-        <Icon name="alert-triangle" size="small" class="text-text-error" />
+        <Icon name="circle-x" size="small" class="text-text-error" />
       </Show>
     </div>
   )
@@ -96,7 +96,7 @@ export function TodoPanel(props: TodoPanelProps) {
               </div>
             </Show>
             <div class="flex items-center gap-2">
-              <ProgressCircle value={stats().progress} size={20} strokeWidth={3} />
+              <ProgressCircle percentage={stats().progress} size={20} strokeWidth={3} />
               <span class="text-12-regular text-text-weak">
                 {stats().completed}/{stats().total}
               </span>
