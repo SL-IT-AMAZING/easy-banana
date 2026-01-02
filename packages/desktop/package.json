@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsgo -b",
-    "predev": "bun ./scripts/predev.ts",
-    "dev": "vite",
+    "build-cli": "bun ./scripts/predev.ts",
+    "dev": "bun ./scripts/dev.ts",
+    "dev:vite": "vite",
     "build": "bun run typecheck && vite build",
     "preview": "vite preview",
     "tauri": "tauri"
